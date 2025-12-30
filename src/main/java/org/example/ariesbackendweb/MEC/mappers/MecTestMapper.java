@@ -1,7 +1,7 @@
 package org.example.ariesbackendweb.MEC.mappers;
 
 import org.example.ariesbackendweb.MEC.DTOs.MecTestResponseDto;
-import org.example.ariesbackendweb.MEC.MecTest;
+import org.example.ariesbackendweb.MEC.entities.MecTest;
 import org.mapstruct.*;
 import org.springframework.stereotype.Component;
 

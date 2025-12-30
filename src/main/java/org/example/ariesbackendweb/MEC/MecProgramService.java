@@ -1,10 +1,10 @@
 package org.example.ariesbackendweb.MEC;
 
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.ariesbackendweb.MEC.DTOs.MecProgramRequestDto;
 import org.example.ariesbackendweb.MEC.DTOs.MecProgramResponseDto;
 import org.example.ariesbackendweb.MEC.DTOs.MecProgramUpdateDto;
+import org.example.ariesbackendweb.MEC.entities.MecProgram;
 import org.example.ariesbackendweb.MEC.mappers.MecProgramMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 public class MecProgramService {
 
     @Autowired
-    private MECProgramRepository mecProgramRepository;
+    private MecProgramRepository mecProgramRepository;
     @Autowired
     private MecProgramMapper mecProgramMapper;
 

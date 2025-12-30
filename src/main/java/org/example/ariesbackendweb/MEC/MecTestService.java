@@ -4,6 +4,8 @@ import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.example.ariesbackendweb.MEC.DTOs.LaunchAgentTestDto;
 import org.example.ariesbackendweb.MEC.DTOs.MecTestResponseDto;
+import org.example.ariesbackendweb.MEC.entities.MecProgram;
+import org.example.ariesbackendweb.MEC.entities.MecTest;
 import org.example.ariesbackendweb.MEC.mappers.MecTestMapper;
 import org.example.ariesbackendweb.common.api.AgentService;
 import org.example.ariesbackendweb.common.api.AgentWsService;
@@ -22,7 +24,6 @@ import java.sql.Timestamp;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.ExecutionException;
@@ -32,12 +33,12 @@ import java.util.stream.Collectors;
 @Service
 @Data
 @Slf4j
-public class MECTestService {
+public class MecTestService {
 
     @Autowired
-    MECTestRepository mecTestRepository;
+    MecTestRepository mecTestRepository;
     @Autowired
-    MECProgramRepository mecProgramRepository;
+    MecProgramRepository mecProgramRepository;
     @Autowired
     FileSystemStorageService fileSystemStorageService;
     @Autowired
@@ -152,5 +153,13 @@ public class MECTestService {
         return mecTestRepository.findByProgramId(programId).stream()
                 .map(mecTestMapper::toResponseDto)
                 .collect(Collectors.toList());
+    }
+
+
+    @Transactional
+    public void storeTestResult(String filename, int duration, MecTest test) {
+        test.setDuration(duration);
+        test.setRetrievedFile(filename);
+        mecTestRepository.save(test);
     }
 }

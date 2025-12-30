@@ -1,4 +1,4 @@
-package org.example.ariesbackendweb.MEC;
+package org.example.ariesbackendweb.MEC.entities;
 
 import jakarta.persistence.*;
 import lombok.*;

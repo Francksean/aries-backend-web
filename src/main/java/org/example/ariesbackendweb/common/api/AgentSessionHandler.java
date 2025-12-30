@@ -1,20 +1,16 @@
 package org.example.ariesbackendweb.common.api;
 
 import lombok.extern.slf4j.Slf4j;
-import org.example.ariesbackendweb.MEC.FileAvailableEvent;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.messaging.simp.stomp.StompCommand;
 import org.springframework.messaging.simp.stomp.StompHeaders;
 import org.springframework.messaging.simp.stomp.StompSession;
 import org.springframework.messaging.simp.stomp.StompSessionHandler;
-import tools.jackson.databind.ObjectMapper;
 
 import java.io.PrintWriter;
 import java.lang.reflect.Type;
-import java.util.Arrays;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @Slf4j
 public class AgentSessionHandler implements StompSessionHandler {
@@ -76,8 +72,6 @@ public class AgentSessionHandler implements StompSessionHandler {
                 handleLogs(message, sessionId, writer);
             } else if (destination.contains("/status/")) {
                 handleStatus(message, sessionId);
-            } else if (destination.contains("/file/")) {
-                handleFile(message, sessionId);
             }
         }
     }
@@ -134,25 +128,5 @@ public class AgentSessionHandler implements StompSessionHandler {
         }
     }
 
-    /**
-     * Gestion des messages de fichiers
-     */
-    private void handleFile(String message, String sessionId) {
-        log.info("FILE AGENT [{}] -> {}", sessionId, message);
-        try {
-            // TODO: Implémenter la logique d'enregistrement des fichiers
-            // emettre l'évènement pour l'enregistrement
 
-            Map<String, String> data = Arrays.stream(message.replaceAll("[{}]", "").split(", "))
-                    .map(s -> s.split("="))
-                    .collect(Collectors.toMap(a -> a[0], a -> a[1]));
-
-            eventPublisher.publishEvent(new FileAvailableEvent(this, data.get("filename"), sessionId, Double.parseDouble(data.get("duration"))));
-
-            brokerMessagingTemplate.convertAndSend("/topic/logs/" + sessionId,
-                    Map.of("log", message, "timestamp", System.currentTimeMillis()).toString());
-        } catch (Exception e) {
-            log.error("Erreur lors du traitement du fichier", e);
-        }
-    }
 }

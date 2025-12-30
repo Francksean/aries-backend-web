@@ -1,4 +1,4 @@
-package org.example.ariesbackendweb.MEC;
+package org.example.ariesbackendweb.MEC.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,7 +13,7 @@ import org.example.ariesbackendweb.common.entities.Program;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "MEC_programs")
+@Table(name = "mec_programs")
 @Entity
 public class MecProgram extends Program {
 

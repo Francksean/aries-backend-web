@@ -3,7 +3,7 @@ package org.example.ariesbackendweb.MEC.mappers;
 import org.example.ariesbackendweb.MEC.DTOs.MecProgramRequestDto;
 import org.example.ariesbackendweb.MEC.DTOs.MecProgramResponseDto;
 import org.example.ariesbackendweb.MEC.DTOs.MecProgramUpdateDto;
-import org.example.ariesbackendweb.MEC.MecProgram;
+import org.example.ariesbackendweb.MEC.entities.MecProgram;
 import org.mapstruct.*;
 import org.springframework.stereotype.Component;
 

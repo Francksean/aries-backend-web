@@ -1,5 +1,6 @@
 package org.example.ariesbackendweb.common.api;
 
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +29,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 @Service
+@Slf4j
 public class AgentWsService {
-
-    private static final Logger log = LoggerFactory.getLogger(AgentWsService.class);
 
     @Autowired
     private SimpMessagingTemplate brokerMessagingTemplate;
